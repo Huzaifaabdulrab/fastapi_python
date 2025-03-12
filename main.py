@@ -45,7 +45,7 @@ def get_side_hustles(apiKey : str):
     return{"side_hustle":random.choice(side_hustles)}
 
 
-@app.get("money_quotes")
+@app.get("/money_quotes")
 def get_money_quotes(apikey:str):
     """Return a random money quote"""
     if apikey != "12345":
