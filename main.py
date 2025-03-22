@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 import random
 
-
 app = FastAPI()
 
 side_hustles = [
@@ -37,17 +36,21 @@ money_quotes = [
     "Money grows on the tree of persistence. – Japanese Proverb",
 ]
 
-@app.get('/side_hustles')
-def get_side_hustles(apiKey : str):
-    """Return a random side hustle idea"""
-    if apiKey != "12345":
-        return {"error": "Invalid API key"}
-    return{"side_hustle":random.choice(side_hustles)}
+
+@app.get("/")
+def read_root():
+    return {
+        "message": "Hello World, Go to /side_hustles or /money_quotes to get a random side hustle or money quote"
+    }
+
+
+@app.get("/side_hustles")
+def get_side_hustles():
+    """Returns a random side hustle idea"""
+    return {"side_hustle": random.choice(side_hustles)}
 
 
 @app.get("/money_quotes")
-def get_money_quotes(apikey:str):
-    """Return a random money quote"""
-    if apikey != "12345":
-        return {"error": "Invalid API key"}
-    return{"money_quote":random.choice(money_quotes)}
+def get_money_quotes():
+    """Returns a random money quote"""
+    return {"money_quote": random.choice(money_quotes)}
